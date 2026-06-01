@@ -5,7 +5,7 @@ const highlights = [
     icon: Code2,
     title: "Problem Solving",
     description:
-      "Building projects and solving techincal challenges through code.",
+      "Building projects and solving technical challenges through code.",
   },
   {
     icon: Rocket,

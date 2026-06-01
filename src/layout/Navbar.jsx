@@ -17,23 +17,20 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
-        }  z-50`}
+      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
+        isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
+      }  z-50`}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <a
-          href="#"
-          className="text-xl font-bold tracking-tight hover:text-primary"
-        >
-          <span className="text-primary"></span>
+        {/* Clean Logo Branding */}
+        <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
+          SF<span className="text-primary">.</span>
         </a>
 
         {/* Desktop Nav */}
@@ -51,34 +48,42 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <Button size="sm" asChild>
-          <a href="#contact">Contact Me</a>
-        </Button>
+        {/* Action Containers */}
+        <div className="flex items-center gap-4">
+          {/* Main Desktop CTA Button (Hidden on Mobile) */}
+          <div className="hidden md:block">
+            <Button size="sm">
+              <a href="#contact">Contact Me</a>
+            </Button>
+          </div>
 
-       {/* Mobile Menu Button */}
-        <Button asChild onClick={() => setIsMobileMenuOpen(false)}>
-          <a href="#contact">Contact Me</a>
-        </Button>
-      </nav> 
+          {/* Mobile Toggle Button (Hidden on Desktop) */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-xl glass text-foreground hover:text-primary transition-colors focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden glass-strong animate-fade-in">
+        <div className="md:hidden glass-strong border-b border-border/50 animate-fade-in">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link, index) => (
               <a
                 href={link.href}
                 key={index}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-muted-foreground hover:text-foreground py-2"
+                className="text-lg text-muted-foreground hover:text-foreground py-2 border-b border-border/20"
               >
                 {link.label}
               </a>
             ))}
-
-            <Button onClick={() => setIsMobileMenuOpen(false)}>
-              Contact Me
+            <Button onClick={() => setIsMobileMenuOpen(false)} className="mt-2">
+              <a href="#contact" className="w-full text-center">Contact Me</a>
             </Button>
           </div>
         </div>
