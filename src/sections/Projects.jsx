@@ -8,7 +8,7 @@ const projects = [
     image: "/projects/chatbot-message.png",
     tags: ["React", "Gemini API", "RAG", "Node.js", "PDF Processing"],
     link: "https://grccompass.vercel.app/dashboard/chatbot",
-    github: null,
+    github: "https://github.com/saadfoda/grccompass_chat",
   },
   {
     title: "Alberta Lakes Monitoring Site",
@@ -17,7 +17,7 @@ const projects = [
     image: "/projects/alberta-lakes.png",
     tags: ["React", "Node.js", "JavaScript", "REST API", "MongoDB"],
     link: null,
-    github: "https://github.com/dusanbarudzija/AlbertaLakesSite",
+    github: "https://github.com/saadfoda/AlbertaLakesSite",
   },
   {
     title: "Tutor Booking Application",
@@ -26,7 +26,7 @@ const projects = [
     image: "/projects/tutor-booking.png",
     tags: ["Kotlin", "Firebase", "Android Studio", "Jira"],
     link: null,
-    github: "https://github.com/macewanCS/F24_C3",
+    github: "https://github.com/saadfoda/F24_C3",
   },
   {
     title: "Property Assessment Application",
@@ -35,7 +35,7 @@ const projects = [
     image: "/projects/property-assessment.png",
     tags: ["Java", "JavaFX", "Data Visualization", "Git"],
     link: null,
-    github: null,
+    github: "https://github.com/saadfoda/Property-Assessment-Application-",
   },
   {
     title: "Car Rental Database System",
