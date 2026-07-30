@@ -27,7 +27,7 @@ const contactInfo = [
     icon: MapPin,
     label: "Location",
     value: "Edmonton, AB, Canada",
-    href: "#",
+    href: null,
   },
 ];
 
@@ -45,6 +45,8 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isLoading) return;
 
     setIsLoading(true);
     setSubmitStatus({ type: null, message: "" });
@@ -99,15 +101,16 @@ export const Contact = () => {
           <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
             Get In Touch
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
-            Let's connect
+          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
+            Let's build
             <span className="font-serif italic font-normal text-white">
-              {" "}and collaborate.
+              {" "}something together.
             </span>
           </h2>
           <p className="text-muted-foreground animate-fade-in animation-delay-200">
-            Feel free to reach out about internships, projects, collaborations,
-            or opportunities in software development and technology.
+            I'm always happy to connect about software engineering opportunities, technical projects, 
+            internships, or potential collaborations. Feel free to reach out. I look forward to hearing 
+            from you.
           </p>
         </div>
 
@@ -124,6 +127,9 @@ export const Contact = () => {
                 <input
                   id="name"
                   type="text"
+                  autoComplete="name"
+                  maxLength={100}
+                  disabled={isLoading}
                   required
                   placeholder="Your name..."
                   value={formData.name}
@@ -144,6 +150,8 @@ export const Contact = () => {
                 <input
                   id="email"
                   type="email"
+                  autoComplete="email"
+                  disabled={isLoading}
                   required
                   placeholder="your@email.com"
                   value={formData.email}
@@ -164,11 +172,14 @@ export const Contact = () => {
                 <textarea
                   rows={5}
                   required
+                  autoComplete="off"
+                  disabled={isLoading}
+                  maxLength={500}
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  placeholder="Your message..."
+                  placeholder="Tell me about your project or opportunity..."
                   className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
                 />
               </div>
@@ -180,7 +191,10 @@ export const Contact = () => {
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <>Sending...</>
+                  <span className="flex items-center gap-2">
+                    Sending...
+                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  </span>
                 ) : (
                   <>
                     Send Message
@@ -191,6 +205,7 @@ export const Contact = () => {
 
               {submitStatus.type && (
                 <div
+                  aria-live="polite"
                   className={`flex items-center gap-3
                      p-4 rounded-xl ${submitStatus.type === "success"
                       ? "bg-green-500/10 border border-green-500/20 text-green-400"
@@ -215,41 +230,61 @@ export const Contact = () => {
                 Contact Information
               </h3>
               <div className="space-y-4">
-                {contactInfo.map((item, i) => (
-                  <a
-                    key={i}
-                    href={item.href}
-                    className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <item.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-muted-foreground">
-                        {item.label}
+                {contactInfo.map((item, i) => {
+                  const content = (
+                    <>
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <item.icon className="w-5 h-5 text-primary" />
                       </div>
-                      <div className="font-medium">{item.value}</div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
 
-            {/* Availability Card */}
-            <div className="glass rounded-3xl p-8 border border-primary/30">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="font-medium">Currently Available</span>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                I'm currently seeking software engineering and technology opportunities,
-                where I can continue learning, contribute to meaningful projects,
-                and grow as a developer.
-              </p>
+                      <div>
+                        <div className="text-sm text-muted-foreground">
+                          {item.label}
+                        </div>
+
+                        <div className="font-medium">
+                          {item.value}
+                        </div>
+                      </div>
+                    </>
+                  );
+
+                  return item.href ? (
+                    <a
+                      key={i}
+                      href={item.href}
+                      className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div
+                      key={i}
+                      className="flex items-center gap-4 p-4 rounded-xl"
+                    >
+                      {content}
+                    </div>
+                  );
+                })}
+                
             </div>
+          </div>
+
+          {/* Availability Card */}
+          <div className="glass rounded-3xl p-8 border border-primary/30">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+              <span className="font-medium">Currently Available</span>
+            </div>
+            <p className="text-muted-foreground text-sm">
+              I'm currently seeking full-time software engineering and IT opportunities.
+              I'm excited to contribute to impactful projects, continue learning from experienced
+              teams, and build reliable software that solves real-world problems.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    </section >
   );
 };

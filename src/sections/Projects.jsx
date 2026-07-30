@@ -1,19 +1,26 @@
 import { ArrowUpRight, Github } from "lucide-react";
-import { AnimatedBorderButton } from "@/components/AnimatedBorderButton";
 const projects = [
   {
     title: "GRC Compass - AI Compliance Assistant",
     description:
-      "Built a RAG-based AI compliance assistant that processes cybersecurity framework PDF documents and provides context-aware compliance guidance, recommendations, and cited responses through an interactive chatbot interface.",
+      "Designed and built an AI-powered cybersecurity compliance assistant that enables analysts to query large regulatory frameworks using natural language. Implemented Retrieval-Augmented Generation (RAG), semantic vector search with PostgreSQL/pgvector, and PDF processing to deliver grounded, context-aware responses.",
     image: "/projects/chatbot-message.png",
-    tags: ["React", "Gemini API", "RAG", "Node.js", "PDF Processing"],
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Gemini", "RAG"],
     link: "https://grccompass.vercel.app/dashboard/chatbot",
     github: "https://github.com/saadfoda/grccompass_chat",
   },
   {
+    title: "Secure Mail Transfer Protocol",
+    description: "Implemented a secure multi-client mail transfer system in Python using TCP sockets, AES-256 encryption, and message authentication codes (MAC) to ensure secure, authenticated communication between clients.",
+    image: "/projects/smtp.png",
+    tags: ["Python", "Sockets", "AES-256", "Cybersecurity"],
+    link: null,
+    github: null,
+  },
+  {
     title: "Alberta Lakes Monitoring Site",
     description:
-      "Developed a lake monitoring dashboard using React and Node.js featuring advanced filtering capabilities for algae levels, improving accessibility and exploration of Alberta environmental data.",
+      "Built a React dashboard for exploring Alberta lake monitoring data through advanced filtering and interactive visualizations, improving accessibility to environmental information.",
     image: "/projects/alberta-lakes.png",
     tags: ["React", "Node.js", "JavaScript", "REST API", "MongoDB"],
     link: null,
@@ -22,7 +29,7 @@ const projects = [
   {
     title: "Tutor Booking Application",
     description:
-      "Built a tutoring platform supporting scheduling and session management with Firebase Authentication and Realtime Database, designed to support 50+ concurrent users.",
+      "Developed an Android tutoring platform with Firebase Authentication and Realtime Database, enabling scheduling and real-time session management for multiple concurrent users.",
     image: "/projects/tutor-booking.png",
     tags: ["Kotlin", "Firebase", "Android Studio", "Jira"],
     link: null,
@@ -46,29 +53,7 @@ const projects = [
     link: null,
     github: null,
   },
-  {
-    title: "Workout Application Prototype",
-    description:
-      "Contributed to the UX research and design process for a fitness application by conducting user research, creating personas, defining user requirements, developing task flows, and supporting the design of high-fidelity Figma prototypes.",
-    image: "/projects/workout-app.png",
-    tags: [
-      "Figma",
-      "UX Research",
-      "User Personas",
-      "Wireframing",
-      "Prototyping"
-    ],
-    link: "https://www.figma.com/proto/2G14qbncVXUAXFNswrx6aL/Group-3-FitFlexxer?node-id=24-2&starting-point-node-id=24%3A2&t=psAe1pXRMQwYyKyt-1",
-    github: null,
-  },
-  {
-    title: "Secure Mail Transfer Protocol",
-    description: "Implemented a secure multi-client mail transfer system in Python using AES-256 encryption and message authentication codes (MAC) to ensure confidentiality and data integrity.",
-    image: "/projects/smtp.png",
-    tags: ["Python", "Sockets", "AES-256", "Cybersecurity"],
-    link: null,
-    github: null,
-  }
+
 ];
 
 export const Projects = () => {
@@ -85,15 +70,10 @@ export const Projects = () => {
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
             Featured Projects
-            <span className="font-serif italic font-normal text-white">
-              {" "}
-              that showcase my skills and creativity.
-            </span>
           </h2>
           <p className="text-muted-foreground animate-fade-in animation-delay-200">
-            A collection of academic, personal, and collaborative projects that
-            demonstrate my experience in software development, databases,
-            cybersecurity, AI, and web technologies.
+            A selection of software engineering, AI, and full-stack projects focused on solving
+            practical technical and business problems.
           </p>
         </div>
 
@@ -102,15 +82,20 @@ export const Projects = () => {
           {projects.map((project, idx) => (
             <div
               key={idx}
-              className="group glass rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
+              className={`group glass rounded-2xl overflow-hidden animate-fade-in ${idx === 0 ? "md:col-span-2" : ""
+                }`}
               style={{ animationDelay: `${(idx + 1) * 100}ms` }}
             >
               {/* Image */}
-              <div className="relative overflow-hidden aspect-video">
+              <div
+                className={`relative overflow-hidden ${idx === 0 ? "aspect-[21/9]" : "aspect-video"
+                  }`}
+              >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${idx === 0 ? "object-top" : ""
+                    }`}
                 />
                 <div
                   className="absolute inset-0 
@@ -118,46 +103,19 @@ export const Projects = () => {
                  to-transparent opacity-60"
                 />
                 {/* Overlay Links */}
-                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                    >
-                      <ArrowUpRight className="w-5 h-5" />
-                    </a>
-                  )}
 
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                    >
-                      <Github className="w-5 h-5" />
-                    </a>
-                  )}
-                </div>
               </div>
 
               {/* Content */}
               <div className="p-6 space-y-4">
-                <div className="flex items-start justify-between">
-                  <h3>{project.title}</h3>
+                <h3 className="text-xl font-semibold leading-tight">
+                  {project.title}
+                </h3>
 
-                  {(project.link || project.github) && (
-                    <ArrowUpRight
-                      className="w-5 h-5 text-muted-foreground group-hover:text-primary
-      group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
-                    />
-                  )}
-                </div>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm line-clamp-4">
                   {project.description}
                 </p>
+
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, tagIdx) => (
                     <span
@@ -168,18 +126,39 @@ export const Projects = () => {
                     </span>
                   ))}
                 </div>
+
+                <div className="flex gap-5 pt-2">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.title} live demo`}
+                      className="text-primary text-sm flex items-center gap-1 hover:underline"
+                    >
+                      Live Demo
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  )}
+
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.title} GitHub repository`}
+                      className="text-primary text-sm flex items-center gap-1 hover:underline"
+                    >
+                      GitHub
+                      <Github className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* View All CTA */}
-        <div className="text-center mt-12 animate-fade-in animation-delay-500">
-          <AnimatedBorderButton>
-            View All Projects
-            <ArrowUpRight className="w-5 h-5" />
-          </AnimatedBorderButton>
-        </div>
       </div>
     </section>
   );

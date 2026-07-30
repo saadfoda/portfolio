@@ -4,48 +4,30 @@ const experiences = [
     role: "Technical Assistant",
     company: "Edmonton Public Schools",
     description:
-      "Configured and deployed Chromebooks, assembled desktop workstations, organized classroom cabling, calibrated Smart Boards, and assisted with device inventory management and technical support across multiple schools.",
+      "Provided Tier 1 IT support across multiple Edmonton Public Schools by deploying Chromebooks, assembling desktop workstations, configuring classroom technology, troubleshooting hardware issues, and maintaining technology inventory records.",
     technologies: [
+      "Windows",
+      "Chromebooks",
       "Hardware Support",
-      "Device Deployment",
       "Troubleshooting",
-      "Inventory Management",
-      "Technical Support",
+      "Asset Management",
     ],
     current: false,
   },
   {
     period: "February 2024 - Present",
-    role: "Entrepeneur",
+    role: "Entrepreneur",
     company: "Garden Yeg",
     description: [
-      "Built and operated a small business focused on customer service and day-to-day operations",
-      "Improved operational workflows and streamlined inventory coordination",
-      "Managed customer communication, scheduling, and service organization",
-      "Developed problem-solving and time management skills while balancing university studies",
+      "Operated a family-owned retail business specializing in traditional men's clothing.",
+      "Managed customer service, inventory, and day-to-day business operations.",
+      "Coordinated product organization and order fulfillment while balancing a full-time Computer Science degree."
     ],
     technologies: [
       "Operations",
       "Customer Service",
-      "Workflow Optimization",
-      "Communication",
-    ],
-    current: true,
-  },
-  {
-    period: "Jun 2022 — Present",
-    role: "Assistant",
-    company: "Sarefa Homes",
-    description: [
-      "Supported administrative and documentation processes across ongoing projects",
-      "Maintained organized records and assisted with operational coordination",
-      "Improved workflow organization and reduced documentation errors",
-    ],
-    technologies: [
-      "Administration",
-      "Documentation",
-      "Organization",
-      "Communication",
+      "Inventory Management",
+      "Business Management",
     ],
     current: true,
   },
@@ -62,30 +44,22 @@ export const Experience = () => {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <span
-            className="text-secondary-foreground text-sm
-           font-medium tracking-wider uppercase animate-fade-in"
-          >
-            Career Journey
-          </span>
           <h2
             className="text-4xl md:text-5xl font-bold
            mt-4 mb-6 animate-fade-in animation-delay-100
             text-secondary-foreground"
           >
-            Experience that{" "}
-            <span className="font-serif italic font-normal text-white">
-              {" "}
-              speaks volumes.
-            </span>
+            Professional Experience
           </h2>
 
           <p
             className="text-muted-foreground
            animate-fade-in animation-delay-200"
           >
-            A timeline of my professional growth, from curious beginner to
-            senior engineer leading teams and building products at scale.
+            My experience spans IT support, business operations, and software development, 
+            building a strong foundation in technical problem solving, collaboration, and 
+            customer service.
+
           </p>
         </div>
 
@@ -104,7 +78,7 @@ export const Experience = () => {
                 {/* Timeline Dot */}
                 <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10">
                   {exp.current && (
-                    <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
+                    <span className="absolute inset-0 rounded-full bg-primary animate opacity-75" />
                   )}
                 </div>
 
@@ -123,9 +97,17 @@ export const Experience = () => {
                     </span>
                     <h3 className="text-xl font-semibold mt-2">{exp.role}</h3>
                     <p className="text-muted-foreground">{exp.company}</p>
-                    <p className="text-sm text-muted-foreground mt-4">
-                      {exp.description}
-                    </p>
+                    {Array.isArray(exp.description) ? (
+                      <ul className="mt-4 space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                        {exp.description.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mt-4 text-sm text-muted-foreground">
+                        {exp.description}
+                      </p>
+                    )}
                     <div
                       className={`flex flex-wrap gap-2 mt-4 ${idx % 2 === 0 ? "md:justify-end" : ""
                         }`}

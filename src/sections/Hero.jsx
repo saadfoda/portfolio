@@ -4,7 +4,6 @@ import {
   ChevronDown,
   Github,
   Linkedin,
-  Twitter,
   Download,
 } from "lucide-react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
@@ -72,32 +71,49 @@ export const Hero = () => {
             <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                Software Developer • CS Graduate
+                Computer Science Graduate • Full-Stack Developer
               </span>
             </div>
 
             {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100">
-                Software Developer
+                Building software that
                 <br />
-                focused on modern web technologies
+                solves real business problems
               </h1>
+
               <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                Hi, I'm Saad Foda - a Computer Science Graduate at MacEwan University passionate
-                about software development, web technologies, and building modern full-stack applications.
+                I'm Saad Foda, a recent Computer Science graduate who enjoys designing
+                full-stack applications and AI-powered tools that simplify workflows,
+                improve productivity, and solve practical business challenges.
               </p>
+
+              {/* Credibility Line */}
+              <div className="flex flex-wrap gap-5 text-sm text-muted-foreground pt-4">
+                <span>Edmonton, AB</span>
+                <span>BSc Computer Science (2026)</span>
+                <span>Full-Stack Development • AI Applications</span>
+              </div>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg">
-                Contact Me <ArrowRight className="w-5 h-5" />
+              <Button
+                size="lg"
+                onClick={() =>
+                  document.getElementById("projects")?.scrollIntoView({
+                    behavior: "smooth",
+                  })
+                }
+              >
+                View Projects
+                <ArrowRight className="w-5 h-5" />
               </Button>
               {/* No more nested interactive elements—clean and browser-compliant */}
               <AnimatedBorderButton
-                href="/projects/Resume2026 Saad_Foda.pdf"
-                download="Saad_Foda_Resume.pdf"
+                href="/projects/Resume2026 Saad Foda.pdf"
+                download="Resume2026 Saad Foda.pdf"
               >
                 <Download className="w-5 h-5" />
                 Download Resume
@@ -106,7 +122,7 @@ export const Hero = () => {
 
             {/* Social Links */}
             <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
-              <span className="text-sm text-muted-foreground">Follow me: </span>
+              <span className="text-sm text-muted-foreground">Find me on:</span>
               {[
                 { icon: Github, href: "https://github.com/saadfoda" },
                 { icon: Linkedin, href: "https://linkedin.com/in/saad-foda" },
@@ -114,6 +130,8 @@ export const Hero = () => {
                 <a
                   key={idx}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
                 >
                   {<social.icon className="w-5 h-5" />}
